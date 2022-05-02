@@ -15,11 +15,11 @@ function getSeason(date) {
   if(arguments.length == 0) return 'Unable to determine the time of year!';
   if(Object.prototype.toString.call(date) !== '[object Date]') throw new Error('Invalid date!');
   
-  let temp = new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(),
-        date.getMinutes(), date.getSeconds(), date.getMilliseconds());
-  if(date.toString() != temp.toString()) throw new Error('Invalid date!');
-  
-  if (!(date instanceof Date) || isNaN(date)) throw new Error('Invalid date!');
+  try {
+    date.getUTCDate();
+  } catch (err) {
+    throw new Error('Invalid date!');
+  }
 
   switch(date.getMonth()) {
     case 0:
