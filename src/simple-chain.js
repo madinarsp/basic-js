@@ -5,25 +5,47 @@ const { NotImplementedError } = require('../extensions/index.js');
  * 
  */
 const chainMaker = {
+
+  val: "",
+  len: 0,
+
   getLength() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    return this.len;
   },
-  addLink(/* value */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  addLink(value) {
+    if(this.len != 0) this.val += "~~";
+    let valAsStr = "" + value;
+    if (valAsStr == "undefined") 
+      this.val += "( )";
+    else {
+      this.val += `( ${valAsStr} )`;
+    }
+    this.len++;
+    return this;
   },
-  removeLink(/* position */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  removeLink(position) {
+    if(!Number.isInteger(position) || position<0 || this.len < position) {
+      this.val = "";
+      this.len = 0;
+      throw new Error();
+    }
+    let tempArr = this.val.split("~~");
+    tempArr.splice(position-1, 1);
+    this.val = tempArr.join("~~");
+    this.len--;
+    return this;
   },
   reverseChain() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    let tempArr = this.val.split("~~");
+    tempArr.reverse();
+    this.val = tempArr.join("~~");
+    return this;
   },
   finishChain() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    let res = this.val;
+    this.val = "";
+    this.len = 0;
+    return res;
   }
 };
 
