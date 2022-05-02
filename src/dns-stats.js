@@ -27,15 +27,12 @@ function getDNSStats(domains) {
   domains.forEach((domain) => {
     let currDomain = "";
     let tempArr = domain.split(".").reverse().map(elem => "." + elem);
-    // let tempArr = [".com", ".epam"];
     for(let i = 0; i < tempArr.length; i++) {
       currDomain += tempArr[i];
       let currValue = res[currDomain];
-      let valToSet = currValue == undefined ? 1 : currValue + 1;
-      res[currDomain] = valToSet;
+      res[currDomain] = currValue == undefined ? 1 : currValue + 1;
     }
   });
-  // res[".com"] = 1;
   return res;
 }
 
