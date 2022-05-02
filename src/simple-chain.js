@@ -24,10 +24,10 @@ const chainMaker = {
     return this;
   },
   removeLink(position) {
-    if(!Number.isInteger(position) || position<0 || this.len < position) {
+    if(!Number.isInteger(position) || position <= 0 || this.len < position) {
       this.val = "";
       this.len = 0;
-      throw new Error();
+      throw new Error('You can\'t remove incorrect link!');
     }
     let tempArr = this.val.split("~~");
     tempArr.splice(position-1, 1);
